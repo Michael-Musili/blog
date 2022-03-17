@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {{url_for('static', filename='css/style.css')}} ">
+    <title>Best Pitch</title>
+</head>
+
+<body>
+    <div id="container">
+        <header class="header">
+            
+            <nav class="navbar">
+                <a href="{{ url_for('main.index') }}" class="navbar-item">
+                    Blogs
+                </a>
+
+                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('main.profile') }}" class="navbar-item">
+                    Profile
+                </a>
+                {% endif %}
+
+                {% if not current_user.is_authenticated %}
+                <a href="{{ url_for('auth.login') }}" class="navbar-item">
+                    Login
+                </a>
+                <a href="{{ url_for('auth.signup') }}" class="navbar-item">
+                    Sign Up
+                </a>
+                {% endif %}
+
+                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('main.create_pitch') }}" class="navbar-item">
+                    Create Blog
+                </a>
+
+                <a href="{{ url_for('auth.logout') }}" class="navbar-item">
+                    Logout
+                </a>
+                {% endif %}
+            </nav>
+
+        </header>
+        <div>
+
+            <h1 class="logo" style="background-color: blue; background-size: cover; text-align: center;font-size: 3.5rem;
+             font-family:'Courier New', Courier, monospace ;color: white;">
+                Blog Review
+            </h1> 
+            
+            <h2 style="text-align: center;background-color:  #f8f8f8; padding-top:5px ;">Post your blogs here</h2>
+        
+             <h2 style="text-align: center;background-color:  #f8f8f8; padding-top:5px ">Sign up to join <button ><a href="{{ url_for('auth.signup') }}" class="navbar-item">
+                Join
+            </a></button></h2>
+             
+        </div>
+            
+        <main class="main">
+
+
+    
+        
+            {% block content %}
+            {% endblock %}
+
+        </main>
+
+    </div>
+</body>
+
+</html>
